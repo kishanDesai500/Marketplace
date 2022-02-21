@@ -196,9 +196,11 @@ const blacklistUser = async() => {
 const whiteListUser = async() => {
     try {
         const inputAddress = $("#whitelistAdd").val();
-        const whiteAddress = await contract.methods.removeFromBlacklist(
-            inputAddress
-        );
+        const whiteAddress = await contract.methods
+            .removeFromBlacklist(inputAddress)
+            .send({
+                from: address,
+            });
         alert("address successfully whiteListed");
     } catch (err) {
         alert(err);

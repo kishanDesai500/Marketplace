@@ -12,6 +12,7 @@ const init = async() => {
         const id = await web3.eth.net.getId();
         console.log(id);
 
+        // add wallets of user
         const accounts = await web3.eth.accounts.wallet.add(
             process.env.PRIVATE_KEY
         );
@@ -49,6 +50,7 @@ const init = async() => {
             });
         console.log(3);
 
+        // for set address of owner to gov
         const setAddressToken = await contract_governance.methods
             .setAddressToken(process.env.tokenAddress)
             .send({ from: process.env.PUBLIC_KEY, gas: 8000000 });
@@ -66,6 +68,7 @@ const init = async() => {
             .getblance(process.env.memberPub)
             .call();
 
+        // approve token of member by gov
         approve = await contract_governance.methods
             .approveToken(process.env.govAddress, 500000)
             .send({
@@ -73,6 +76,7 @@ const init = async() => {
                 gas: 8000000,
             });
 
+        // test transfer token
         transferforCheck = await contract_governance.methods
             .transferFromContrect(process.env.memberPub, process.env.userPub, 10)
             .send({
@@ -83,16 +87,16 @@ const init = async() => {
             .getToken()
             .send({ from: process.env.memberPub, value: 3, gas: 500000 });
 
+        // blacklist user
         blockuser = await contract_governance.methods
             .blackList("0xa057ba6cef9877e638643afedf03e70c033c42a0")
-            .send({ from: process.env.PRIVATE_KEY });
+            .send({ from: process.env.PUBLIC_KEY, gas: 500000 });
 
-        console.log(memberBalance);
+        console.log(blockuser);
         const userBalance = await contract_governance.methods
             .getblance(process.env.memberPub)
             .call();
 
-        //200002820
         console.log(userBalance);
     } catch (err) {
         console.log(err);
