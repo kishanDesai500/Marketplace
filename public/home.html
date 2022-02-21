@@ -1,0 +1,114 @@
+<head>
+    <title>market place Blockchain</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
+    <!-- <script src="./index.js"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js" integrity="sha512-C63V0mFzwl8KV2fRz0QJNKX0d9877urOLSUq5WUq8nUOhDl69hKdGr9mAvl57k47GNjqEMAtiufsvDnk7xs8+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="./main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.js" integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    </script>
+    <style>
+        body {
+            margin: 20px;
+        }
+        
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 50px;
+            padding: 30px;
+        }
+        
+        .photo {
+            max-width: 31.333%;
+            padding: 0 10px;
+            height: 240px;
+        }
+        
+        .photo img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+
+
+<body onload="init()">
+    <button class="enableEthereumButton" onclick="ethEnabled()">Enable Ethereum</button><br>
+    <h3><span>UserName:</span> <span id="displayName"></span></h3>
+
+    <h1 class="page-header">reword by clicking on image - Blockchain </h1>
+    <div class="row">
+        <div class="col-1"> tokens of user</div>
+        <div class="col-1" id="userBalance"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"> Governance Token: </div>
+        <div class="col-1" id="govBalance"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"> member Token: </div>
+        <div class="col-1" id="memberBalance"></div>
+    </div>
+    <div class="images">
+        <div class="photo" onclick="getTokenReword()">
+            <img src="./img/911401.jpg" alt="photo" />
+        </div>
+
+        <div class="photo" onclick="getTokenReword()">
+            <img src="./img/zoro.jpg" alt="photo" />
+        </div>
+
+        <div class="photo" onclick="getTokenReword()">
+            <img src="./img/ace.jpg" alt="photo" />
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="page-header">
+                <h3>Buy Token From Here</h3>
+            </div>
+            <input type="text" id="token" placeholder="Enter number of token" onkeyup="countToken()" />
+            <button id="buyToken" onclick="buyToken()">Buy Token</button>
+            <div class="row">
+                <div class="col-1">
+                    <h4>Token you get : </h4>
+                </div>
+                <h3>
+                    <div class="col-1" id="youGetToken"></div>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="page-header">
+                <h3>BlackList User</h3>
+            </div>
+            <input type="text" id="blacklistAdd" placeholder="Enter user address" />
+            <button type="submit" onclick="blacklistUser()">BlackList User</button>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="page-header">
+                <h3>WhiteList User</h3>
+            </div>
+            <input type="text" id="whitelistAdd" placeholder="Enter user address" />
+            <button type="submit" onclick="whiteListUser()">WhiteList User</button>
+        </div>
+    </div>
+</body>
+
+</html>
