@@ -161,7 +161,7 @@ const login = async() => {
 
 const countToken = async() => {
     let noOfToken = $("#token").val();
-    let total = noOfToken * 1000;
+    let total = noOfToken * 10;
     $("#youGetToken").text(total);
 };
 
@@ -170,7 +170,11 @@ const buyToken = async() => {
         const wai = $("#token").val();
         const tokenStatus = await contract.methods
             .getToken()
-            .send({ from: address, value: wai });
+            .send({ from: address, value: wai })
+            .catch((err) => {
+                console.log("Error", err);
+                alert("some error token buy transaction custom");
+            });
         setBalance();
         console.log(tokenStatus);
     } catch (err) {
@@ -178,17 +182,74 @@ const buyToken = async() => {
     }
 };
 
+// const blacklistUser = async () => {
+//   try {
+//     const inputAddress = $("#blacklistAdd").val();
+//     console.log(inputAddress);
+
+//     //  const blackAddress = await
+//     await contract.methods
+//       .blackList(inputAddress)
+//       .send({
+//         from: address,
+//       })
+//       .on("transactionHash", (hash) => {
+//         console.log("TX Hash", hash);
+//       })
+//       .then((receipt) => {
+//         console.log("Mined", receipt);
+//         if (receipt.status == "0x1" || receipt.status == 1) {
+//           console.log("Transaction Success");
+//         } else console.log("Transaction Failed");
+//       })
+//       .catch((err) => {
+//         console.log("Error", err);
+//         alert("some error in transaction custom");
+//       })
+//       .finally(() => {
+//         console.log("Extra Code After Everything");
+//       });
+//     // console.log(blackAddress);
+//     alert("user black listed");
+//   } catch (err) {
+//     // console.log(err);
+//     // console.log(err.message);
+//     alert(err);
+//   }
+// };
+
 const blacklistUser = async() => {
     try {
         const inputAddress = $("#blacklistAdd").val();
         console.log(inputAddress);
 
-        const blackAddress = await contract.methods.blackList(inputAddress).send({
-            from: address,
-        });
-        console.log(address);
-        alert(blackAddress);
+        //  const blackAddress = await
+        await contract.methods
+            .blackList(inputAddress)
+            .send({
+                from: address,
+            })
+            .on("transactionHash", (hash) => {
+                console.log("TX Hash", hash);
+            })
+            .then((receipt) => {
+                console.log("Mined", receipt);
+                if (receipt.status == "0x1" || receipt.status == 1) {
+                    console.log("Transaction Success");
+                } else console.log("Transaction Failed");
+            })
+            .catch((err) => {
+                console.log("Error", err);
+                alert("some error in transaction custom");
+            })
+            .finally(() => {
+                console.log("Extra Code After Everything");
+            });
+        // console.log(blackAddress);
+        alert("user black listed");
     } catch (err) {
+        // console.log(err);
+        // console.log(err.message);
         alert(err);
     }
 };
@@ -200,9 +261,37 @@ const whiteListUser = async() => {
             .removeFromBlacklist(inputAddress)
             .send({
                 from: address,
+            })
+            .catch((err) => {
+                console.log("Error", err);
+                alert("some error in whitelist transaction custom");
+                return;
             });
         alert("address successfully whiteListed");
     } catch (err) {
+        alert(err);
+    }
+};
+
+const getAvaxForToken = async() => {
+    try {
+        console.log(address);
+        let inputToken = $("#getAvax").val();
+        console.log("inputToken", inputToken);
+        const getTokens = await contract.methods
+            .sellToken(inputToken)
+            .send({
+                from: address,
+            })
+            .catch((err) => {
+                console.log("Error", err);
+                alert("some error in sellToken transaction custom");
+                return;
+            });
+        setBalance();
+        alert("success");
+    } catch (err) {
+        console.log(err);
         alert(err);
     }
 };

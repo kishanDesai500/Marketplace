@@ -39,6 +39,12 @@ interface interfaceArkius {
         address spender,
         uint256 amount
     ) external returns (bool);
+
+    function transfer(address recipient, uint256 amount)
+        external
+        returns (bool);
+
+    function balanceOfUnlockToken(address account) external returns (uint256);
 }
 
 contract Arkius is ERC20 {

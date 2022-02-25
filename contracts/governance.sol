@@ -13,7 +13,7 @@ interface interfaceGov {
 }
 
 contract governance is BlackLkisted {
-    uint256 price = 1000;
+    uint256 price = 10;
 
     address addressToken;
     interfaceArkius arkius;
@@ -87,5 +87,16 @@ contract governance is BlackLkisted {
         returns (bool)
     {
         return arkius.approveToken(msg.sender, spender, amount);
+    }
+
+    function AVAXforTokens(uint256 amount) external {
+        uint256 avax = amount / price;
+        arkius.transfer(address(this), amount);
+
+        payable(msg.sender).transfer(avax);
+    }
+
+    function getUnlockToken(address userAddress) external returns (uint256) {
+        return arkius.balanceOfUnlockToken(userAddress);
     }
 }

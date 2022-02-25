@@ -2,6 +2,8 @@
 
 import "./2_Owner.sol";
 
+pragma solidity 0.8.7;
+
 contract BlackLkisted is Owner {
     mapping(address => bool) isBlacklisted;
 
