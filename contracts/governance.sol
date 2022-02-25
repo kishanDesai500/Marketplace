@@ -96,6 +96,12 @@ contract governance is BlackLkisted {
         payable(msg.sender).transfer(avax);
     }
 
+    function sellToken(uint256 token) external payable {
+        uint256 amount = token / price;
+        arkius.transferTokenSell(msg.sender, address(this), token);
+        payable(msg.sender).transfer(amount);
+    }
+
     function getUnlockToken(address userAddress) external returns (uint256) {
         return arkius.balanceOfUnlockToken(userAddress);
     }

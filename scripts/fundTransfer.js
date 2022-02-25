@@ -87,17 +87,24 @@ const init = async() => {
                 from: process.env.memberPub,
                 gas: 8000000,
             });
+
+        approve = await contract_governance.methods
+            .approveToken(process.env.govAddress, "5000000000000000000")
+            .send({
+                from: process.env.memberPub,
+                gas: 8000000,
+            });
         console.log(7);
         console.log("Approved Token");
 
         // test transfer token
-        // transferforCheck = await contract_governance.methods
-        //     .transferFromContrect(process.env.memberPub, process.env.userPub, 10)
-        //     .send({
-        //         from: process.env.userPub,
-        //         gas: 8000000,
-        //     });
-        // console.log(8);
+        transferforCheck = await contract_governance.methods
+            .transferFromContrect(process.env.memberPub, process.env.userPub, 10)
+            .send({
+                from: process.env.userPub,
+                gas: 8000000,
+            });
+        console.log(8);
 
         usergetToken = await contract_governance.methods
             .getToken()
@@ -106,11 +113,11 @@ const init = async() => {
         console.log(9);
 
         // blacklist user
-        blockuser = await contract_governance.methods
-            .blackList("0xa057ba6cef9877e638643afedf03e70c033c42a0")
-            .send({ from: process.env.PUBLIC_KEY, gas: 500000 });
-        console.log("blockuser", blockuser);
-        console.log(10);
+        // blockuser = await contract_governance.methods
+        //     .blackList("0xa057ba6cef9877e638643afedf03e70c033c42a0")
+        //     .send({ from: process.env.PUBLIC_KEY, gas: 500000 });
+        // console.log("blockuser", blockuser);
+        // console.log(10);
 
         const userBalance = await contract_governance.methods
             .getblance(process.env.memberPub)

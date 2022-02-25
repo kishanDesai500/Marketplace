@@ -93,11 +93,13 @@ const setBalance = async() => {
         const balance = await contract.methods.getblance(address).call();
         const balance2 = await contract.methods.getblance(env.memberAddress).call();
         const balance3 = await contract.methods.getblance(env.address).call();
+        const balance2U = await contract.methods.getUnlockToken(address).call();
 
         console.log(balance);
 
         $("#userBalance").text(balance);
         $("#memberBalance").text(balance2);
+        $("#memberUnlock").text(balance2U);
         $("#govBalance").text(balance3);
     } catch (err) {
         console.log("setBalance" + err);
